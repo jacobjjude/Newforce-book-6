@@ -61,5 +61,5 @@ export const getTopics = () => {
 }
 
 export const getRecipients = () => {
-    
+    return applicationState.recipients.map(item => ({...item}))
 }

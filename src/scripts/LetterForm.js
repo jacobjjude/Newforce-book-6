@@ -1,4 +1,4 @@
-import { getAuthors, getTopics } from "./DataAccess.js"
+import { getAuthors, getRecipients, getTopics } from "./DataAccess.js"
 
 export const letterForm = () => {
     let html = `
@@ -16,6 +16,7 @@ export const letterForm = () => {
     </div>
     <div class="field">
         <label class="label">Recipient</label>
+        ${buildRecipients()}
     </div>
     <button class="button" id="submitRequest">Submit Request</button>
     `
@@ -40,5 +41,15 @@ const buildTopics = () => {
     for (const topic of topics) {
         html += `<input type="radio" name="topic" id="topic--${topic.id}">${topic.name}</input>`
     }
+    return html
+}
+
+const buildRecipients = () => {
+    const recipients = getRecipients()
+    let html = `<select><option value=0>Select a recipient</option>`
+    for (const recipient of recipients) {
+        html += `<option value="${recipient.id}" name="recipient">${recipient.name}</option>`
+    }
+    html += `</select>`
     return html
 }
