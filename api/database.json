@@ -1,0 +1,67 @@
+{
+    "author": [
+        {
+            "id": 1,
+            "name": "H.P. Lovecraft",
+            "email": "loverboi@ryleh.com"
+        },
+        {
+            "id": 2,
+            "name": "J.R.R. Tolkien",
+            "email": "hobbitshortiezzz@hotmail.com"
+        },
+        {
+            "id": 3,
+            "name": "George Orwell",
+            "email": "1984isntaboutwhatyouthink@youdummies.com"
+        }
+    ],
+    "recipient": [
+        {
+            "id": 1,
+            "name": "George Costanza",
+            "email": "cantstandya@gmail.com"
+        },
+        {
+            "id": 2,
+            "name": "Mark",
+            "email": "werockinwithmark@outlook.com"
+        },
+        {
+            "id": 3,
+            "name": "Tav",
+            "email": "theoriginaltav@baldursgate.com"
+        }
+    ],
+    "topics": [
+        {
+            "id": 1,
+            "name": "Business"
+        },
+        {
+            "id": 2,
+            "name": "Friendly"
+        },
+        {
+            "id": 3,
+            "name": "Family"
+        },
+        {
+            "id": 4,
+            "name": "Congratulations"
+        },
+        {
+            "id": 5,
+            "name": "Condolences"
+        }
+    ],
+    "letterRequest": [
+        {
+            "id": 1,
+            "authorId": 2,
+            "topicId": 4,
+            "recipientId": 2,
+            "text": "testing"
+        }
+    ]
+}
