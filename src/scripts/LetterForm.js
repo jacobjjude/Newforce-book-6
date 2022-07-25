@@ -1,5 +1,23 @@
 import { getAuthors, getRecipients, getTopics } from "./DataAccess.js"
 
+document.addEventListener('click', clickEvent => {
+    if (clickEvent.target.id === 'submitRequest') {
+        const userLetter = document.querySelector('input[name="textLetter"]').value
+        const userAuthor = document.querySelector('input[name="author"]').value
+        const userTopic = document.querySelector('input[name="topic]').value
+        const userRecipient = document.querySelector('input[name="recipient"]')
+
+        const dataToSendToAPI = {
+            text: userLetter,
+            authorId: userAuthor,
+            topicId: userTopic,
+            recipientId: userRecipient
+        }
+        //build this function tomorrow. Start here, bozo
+        sendRequest(dataToSendToAPI)
+    }
+})
+
 export const letterForm = () => {
     let html = `
     <div class="field">
@@ -8,7 +26,7 @@ export const letterForm = () => {
     </div>
     <div class="field">
         <label class="label">Letter</label>
-        <input class="input" type="textarea"></input>
+        <input class="input" type="textarea" name="textLetter"></input>
     </div>
     <div class="field">
         <label class="label">Topics</label>
@@ -29,7 +47,7 @@ const buildAuthors = () => {
     let html = `<select><option value=0>Select an author</option>`
     //go back and later change this to maps. Ask someone how. Would not return string.
     for (const author of authors) {
-        html += `<option value="${author.id}">${author.name}</option>`
+        html += `<option value="${author.id}" name="author">${author.name}</option>`
     }
     html += `</select>`
     return html
