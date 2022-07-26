@@ -37,7 +37,7 @@ export const letterForm = () => {
         <label class="label">Letter</label>
         <textarea name="textLetter" rows="4" cols="50"></textarea>
     </div>
-    <div class="field">
+    <div class="topics">
         <label class="label">Topics</label>
         ${buildTopics()}
     </div>

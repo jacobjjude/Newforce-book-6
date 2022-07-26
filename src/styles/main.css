@@ -1,4 +1,15 @@
 ul {
-    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
     list-style: none;
+    background-color: #355070;
+    color: #eaac8b;
+    border-radius: 10px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
