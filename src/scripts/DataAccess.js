@@ -6,7 +6,7 @@ export const fetchRequests = () => {
     .then(response => response.json())
     .then(
         (serviceRequests) => {
-            applicationState.serviceRequests = serviceRequests
+            applicationState.letterRequests = serviceRequests
         }
     )
 }
@@ -62,4 +62,22 @@ export const getTopics = () => {
 
 export const getRecipients = () => {
     return applicationState.recipients.map(item => ({...item}))
+}
+
+export const sendRequest = (userLetterRequest) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userLetterRequest)
+    }
+
+    return fetch(`${API}/letterRequest`, fetchOptions)
+    .then(response => response.json())
+    .then(
+        () => {
+            document.dispatchEvent(new CustomEvent ('stateChanged'))
+        }
+    )
 }

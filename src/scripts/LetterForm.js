@@ -1,17 +1,26 @@
-import { getAuthors, getRecipients, getTopics } from "./DataAccess.js"
+import { getAuthors, getRecipients, getTopics, sendRequest } from "./DataAccess.js"
 
 document.addEventListener('click', clickEvent => {
     if (clickEvent.target.id === 'submitRequest') {
-        const userLetter = document.querySelector('input[name="textLetter"]').value
-        const userAuthor = document.querySelector('input[name="author"]').value
-        const userTopic = document.querySelector('input[name="topic]').value
-        const userRecipient = document.querySelector('input[name="recipient"]')
+        //get id of author select and recipient, to store value
+        const authorSelect = document.getElementById('authors')
+        const recipientSelect = document.getElementById('recipients')
+
+        //get todays date
+        const today = new Date()
+        const date = today.getMonth()+1 + '-' + today.getDate() + '-' + today.getFullYear()
+
+        const userLetter = document.querySelector('textarea[name="textLetter"]').value
+        const userAuthor = authorSelect.options[authorSelect.selectedIndex].value
+        const userTopic = grabTopic()
+        const userRecipient = recipientSelect.options[recipientSelect.selectedIndex].value
 
         const dataToSendToAPI = {
             text: userLetter,
             authorId: userAuthor,
             topicId: userTopic,
-            recipientId: userRecipient
+            recipientId: userRecipient,
+            date: date
         }
         //build this function tomorrow. Start here, bozo
         sendRequest(dataToSendToAPI)
@@ -26,7 +35,7 @@ export const letterForm = () => {
     </div>
     <div class="field">
         <label class="label">Letter</label>
-        <input class="input" type="textarea" name="textLetter"></input>
+        <textarea name="textLetter" rows="4" cols="50"></textarea>
     </div>
     <div class="field">
         <label class="label">Topics</label>
@@ -44,7 +53,7 @@ export const letterForm = () => {
 //function that builds author dropdown, gets author from Data Access
 const buildAuthors = () => {
     const authors = getAuthors()
-    let html = `<select><option value=0>Select an author</option>`
+    let html = `<select id="authors"><option value=0>Select an author</option>`
     //go back and later change this to maps. Ask someone how. Would not return string.
     for (const author of authors) {
         html += `<option value="${author.id}" name="author">${author.name}</option>`
@@ -57,17 +66,23 @@ const buildTopics = () => {
     const topics = getTopics()
     let html = ``
     for (const topic of topics) {
-        html += `<input type="radio" name="topic" id="topic--${topic.id}">${topic.name}</input>`
+        html += `<input type="radio" name="topic" id="${topic.id}">${topic.name}</input>`
     }
     return html
 }
 
 const buildRecipients = () => {
     const recipients = getRecipients()
-    let html = `<select><option value=0>Select a recipient</option>`
+    let html = `<select id="recipients"><option value=0>Select a recipient</option>`
     for (const recipient of recipients) {
         html += `<option value="${recipient.id}" name="recipient">${recipient.name}</option>`
     }
     html += `</select>`
     return html
 }
+
+const grabTopic = () => {
+    const selected = document.querySelector('input[type=radio][name=topic]:checked')
+    return selected.id
+}
+

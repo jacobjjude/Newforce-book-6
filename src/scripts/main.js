@@ -2,6 +2,12 @@ import { fetchAuthors, fetchRecipients, fetchRequests, fetchTopics } from "./Dat
 import { penPal } from "./PenPal.js"
 const mainContainer = document.querySelector('#container')
 
+document.addEventListener(
+    'stateChanged', 
+    customEvent => {
+        render()
+    })
+
 const render = () => {
     fetchRequests()
     .then(() => fetchAuthors())
